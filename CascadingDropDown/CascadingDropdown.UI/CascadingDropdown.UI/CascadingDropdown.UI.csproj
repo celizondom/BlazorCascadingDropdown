@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CascadingDropdown.BusinessLogic.Interface\CascadingDropdown.BusinessLogic.Interface.csproj" />
+    <ProjectReference Include="..\..\CascadingDropdown.BusinessLogic\CascadingDropdown.BusinessLogic.csproj" />
+    <ProjectReference Include="..\..\CascadingDropdown.Models\CascadingDropdown.Models.csproj" />
+    <ProjectReference Include="..\..\CascadingDropdown.Services.Interface\CascadingDropdown.Services.Interface.csproj" />
+    <ProjectReference Include="..\..\CascadingDropdown.Services\CascadingDropdown.Services.csproj" />
+    <ProjectReference Include="..\CascadingDropdown.UI.Client\CascadingDropdown.UI.Client.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>

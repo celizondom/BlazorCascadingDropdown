@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CascadingDropdown.BusinessLogic.Interface\CascadingDropdown.BusinessLogic.Interface.csproj" />
+    <ProjectReference Include="..\CascadingDropdown.Models\CascadingDropdown.Models.csproj" />
+    <ProjectReference Include="..\CascadingDropdown.Services.Interface\CascadingDropdown.Services.Interface.csproj" />
+  </ItemGroup>
+
+</Project>

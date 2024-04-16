@@ -1,0 +1,94 @@
+﻿@page "/"
+@using CascadingDropdown.BusinessLogic.Interface
+@using CascadingDropdown.Models
+@inject IVideoGameBusinessLogic VideoGameService
+@rendermode InteractiveServer
+
+<PageTitle>Cascading Dropdown</PageTitle>
+
+<h1 class="h1 text-center">Cascading Dropdown example</h1>
+
+<div class="row m-3">
+  <div class="col-md-6 ">
+    <label class="fw-bold" for="platformsList">Select a platform</label>
+    <select id="platformsList" 
+            @bind="selectedPlatformId" 
+            @bind:after="OnPlatformSelected"
+            class="form-select" 
+            aria-label="Default select">
+      <option value="0">-- Choose a Platform --</option>
+      @foreach (var platformItem in _platformsModel)
+      {
+        <option value="@platformItem.Id">@platformItem.Name</option>
+      }
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label class="fw-bold" for="genresList">Select a genre</label>
+    <select id="genresList"
+            @bind="selectedGenreId" 
+            @bind:after="OnGenreSelected"
+            class="form-select"
+            aria-label="Default select">
+      <option value="0">-- Choose a Platform --</option>
+      @foreach (var genreItem in _genreModel)
+      {
+        <option value="@genreItem.Id">@genreItem.Name</option>
+      }
+    </select>
+  </div>
+</div>
+
+<div class="row col-12 m-2">
+  <div class="col-12">
+
+    <table class="table table-responsive-md table-striped table-hover">
+      <thead>
+        <tr>
+          <th width="30%">Game Id</th>
+          <th width="70%">Game Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var videoGameItem in _videoGameModel)
+        {
+          <tr>
+            <td value="@videoGameItem.Id">@videoGameItem.Id</td>
+            <td value="@videoGameItem.Id">@videoGameItem.Title</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@code{
+  private List<PlatformModel> _platformsModel = new();
+  private List<GenreModel> _genreModel = new();
+  private List<VideoGameModel> _videoGameModel = new();
+
+  private int selectedPlatformId;
+  private int selectedGenreId;
+  private int selectedVideGameId;
+
+  protected override async Task OnInitializedAsync(){
+    _platformsModel = await VideoGameService.GetPlatformsAsync();
+  }
+
+  private async Task OnPlatformSelected()
+  {
+    _genreModel = await VideoGameService.GetGenresByPlatformIdAsync(selectedPlatformId);
+    _videoGameModel.Clear();
+
+    selectedGenreId = 0;
+    selectedVideGameId = 0;
+  }
+
+  private async Task OnGenreSelected()
+  {
+    _videoGameModel = await VideoGameService.GetVideoGamesByPlatformAndGenreAsync(
+      selectedPlatformId, 
+      selectedGenreId);
+  }
+}
